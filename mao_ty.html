@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Rat(name, kg, speed, status, catchs) {
+        this.name = name;
+        this.kg = kg;
+        this.speed = speed;
+        this.status = status;
+        this.catchs = catchs;
+        this.getStatus = function () {
+            return this.status;
+        };
+        this.setStatus = function (status) {
+            this.status = status;
+        };
+        this.sounding = function (string) {
+            alert("chít chít");
+        };
+        this.getCatchs = function () {
+            return this.catchs;
+        };
+        this.setCatchs = function (catchs) {
+            this.catchs = catchs;
+        }
+    }
+
+    function Cat(name, kg, speed) {
+        this.name = name;
+        this.kg = kg;
+        this.speed = speed; //Math.floor(Math.random() * 10);
+        this.sounding = function (string) {
+            alert("meo meo");
+        };
+        this.theMouse = function (rat) {
+            if (this.speed > rat.speed && rat.status) {
+                rat.setCatchs(true);
+                alert("tốc độ của mèo là: " + this.speed + ";  tốc độ của chuột là : " + rat.speed + '---->mèo tóm được chuột');
+            } else {
+                rat.setCatchs(false);
+                alert("tốc độ của mèo là: " + this.speed + ";  tốc độ của chuột là : " + rat.speed + '---->mèo  không tóm được chuột');
+
+            }
+        };
+        this.eatMouse = function (rat) {
+            //this.theMouse;
+            if (rat.status && rat.getCatchs()) {
+                alert("khối lượng mèo đã tăng lên sau khi ăn chuột từ : " + this.kg + "-->" + (this.kg += rat.kg));
+                //this.kg+=rat.kg;
+            } else {
+                alert("khối lượng mèo  sau khi không ăn được chuột là : " + this.kg);
+                //return this.kg;
+            }
+        }
+    }
+
+    let rat = new Rat("rat", 4, 5, true, false);
+    let rat1 = new Rat("rat", 3, 6, true, false);
+    let cat = new Cat("cat", 6, Math.floor(Math.random() * 10));
+    cat.theMouse(rat);
+    cat.eatMouse(rat);
+    cat.theMouse(rat1);
+    cat.eatMouse(rat1);
+
+</script>
+</body>
+</html>
